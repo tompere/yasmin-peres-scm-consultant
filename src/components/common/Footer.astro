@@ -1,24 +1,12 @@
 <footer class="bg-pink-50 border-t border-pink-100">
-  <div class="max-w-6xl mx-auto px-6 py-12">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-      <!-- Brand -->
-      <div class="flex items-center gap-2">
-        <span class="text-lg font-bold text-navy-700">יסמין פרס</span>
-        <span class="text-[10px] uppercase tracking-[0.2em] text-pink-400 font-medium border border-pink-200 rounded px-1.5 py-0.5 leading-tight">SCM</span>
-      </div>
-
-      <!-- Links -->
-      <div class="flex items-center gap-6">
-        <a href="https://wa.me/972548882218" target="_blank" rel="noopener noreferrer" class="text-sm text-navy-400 hover:text-[#25D366] transition-colors">WhatsApp</a>
-        <a href="mailto:yasminbit@gmail.com" class="text-sm text-navy-400 hover:text-pink-500 transition-colors">אימייל</a>
-        <a href="https://www.linkedin.com/in/yasmin-peres-abb7545b/" target="_blank" rel="noopener noreferrer" class="text-sm text-navy-400 hover:text-pink-500 transition-colors">LinkedIn</a>
-      </div>
-    </div>
-
-    <div class="mt-8 pt-6 border-t border-pink-100 text-center">
-      <p class="text-xs text-navy-300">
-        &copy; {new Date().getFullYear()} יסמין פרס — ייעוץ שרשרת אספקה. כל הזכויות שמורות.
-      </p>
+  <div class="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-right">
+    <p class="text-[13px] text-navy-300">
+      &copy; {new Date().getFullYear()} יסמין פרס — ייעוץ שרשרת אספקה. כל הזכויות שמורות.
+    </p>
+    <div class="flex gap-4 text-[13px] text-navy-300">
+      <a href={`${import.meta.env.BASE_URL}/terms`} class="hover:text-navy-500 transition-colors">תקנון האתר</a>
+      <span class="text-pink-200">|</span>
+      <a href={`${import.meta.env.BASE_URL}/accessibility`} class="hover:text-navy-500 transition-colors">הצהרת נגישות</a>
     </div>
   </div>
 </footer>
