@@ -5,3 +5,5 @@ dist/
 *.local
 .env
 .pnpm-store
+screenshots/
+scripts/
