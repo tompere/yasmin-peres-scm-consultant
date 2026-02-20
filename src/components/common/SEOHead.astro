@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   description: string;
+  noindex?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL("/yasmin_peres_csm_1.png", Astro.site);
 ---
@@ -17,7 +18,11 @@ const ogImageURL = new URL("/yasmin_peres_csm_1.png", Astro.site);
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalURL} />
-<meta name="robots" content="index, follow" />
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
@@ -42,10 +47,120 @@ const ogImageURL = new URL("/yasmin_peres_csm_1.png", Astro.site);
 <link rel="alternate" hreflang="he-IL" href={canonicalURL} />
 <link rel="alternate" hreflang="x-default" href={canonicalURL} />
 
-<!-- Fonts -->
+<!-- Fonts — async load to avoid render-blocking -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
+/>
+<link
   href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
   rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
 />
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
+
+<!-- Preload hero image for LCP -->
+<link rel="preload" as="image" href="/yasmin_peres_csm_1.png" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://yasmin-peres.consulting/#business",
+      "name": "יסמין פרס - ייעוץ שרשרת אספקה ותפעול",
+      "alternateName": "Yasmin Peres - Supply Chain Consulting",
+      "url": "https://yasmin-peres.consulting/",
+      "image": "https://yasmin-peres.consulting/yasmin_peres_csm_1.png",
+      "description": "מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.",
+      "telephone": "+972-54-888-2218",
+      "email": "yasminbit@gmail.com",
+      "founder": { "@id": "https://yasmin-peres.consulting/#person" },
+      "areaServed": { "@type": "Country", "name": "Israel" },
+      "knowsLanguage": ["he", "en"],
+      "sameAs": ["https://www.linkedin.com/in/yasmin-peres-abb7545b/"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "שירותי ייעוץ שרשרת אספקה",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "תכנון ובקרה - Planning & Control",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הקמה ושיפור מערכי תכנון (S&OP)", "description": "סנכרון מלא בין מכירות, תפעול ורכש" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שיפור מדדי שירות (OTD/OTIF)", "description": "צמצום פערים בין התכנון לביצוע" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "בניית תחזיות ביקוש", "description": "תחזיות מדויקות למניעת חוסרים או עודפים" } }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "ניהול מלאי ורכש - Inventory & Procurement",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אופטימיזציה של רמות מלאי", "description": "צמצום מלאי מת ושיפור תזרים המזומנים" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ניהול ספקים ורכש", "description": "ניהול ספקים, רכש ומשלוחי ייבוא/ייצוא" } }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "מצוינות תפעולית - Operational Excellence",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הגדרת KPIs ומדדי ליבה", "description": "ניהול ביצועים שוטף ואבחון צווארי בקבוק" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ליווי טרנספורמציה דיגיטלית", "description": "הטמעת מערכות תומכות החלטה" } }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://yasmin-peres.consulting/#person",
+      "name": "יסמין פרס",
+      "alternateName": "Yasmin Peres",
+      "jobTitle": "יועצת שרשרת אספקה אסטרטגית",
+      "description": "15 שנות ניסיון בניהול שרשראות אספקה גלובליות, כולל תפקידי Supply Chain Director בטבע ו-Head of Plant Supply Chain בפיברו",
+      "image": "https://yasmin-peres.consulting/yasmin_peres_csm_1.png",
+      "url": "https://yasmin-peres.consulting/",
+      "telephone": "+972-54-888-2218",
+      "email": "yasminbit@gmail.com",
+      "alumniOf": { "@type": "EducationalOrganization", "name": "B.Sc הנדסת תעשייה וניהול" },
+      "knowsAbout": ["Supply Chain Management", "S&OP", "Inventory Optimization", "Procurement", "Operational Excellence", "Demand Planning"],
+      "worksFor": { "@id": "https://yasmin-peres.consulting/#business" },
+      "sameAs": ["https://www.linkedin.com/in/yasmin-peres-abb7545b/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yasmin-peres.consulting/#website",
+      "name": "יסמין פרס - ייעוץ וניהול שרשרת אספקה",
+      "alternateName": "Yasmin Peres - Supply Chain Consulting",
+      "url": "https://yasmin-peres.consulting/",
+      "inLanguage": "he-IL",
+      "publisher": { "@id": "https://yasmin-peres.consulting/#business" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://yasmin-peres.consulting/",
+      "name": "יסמין פרס | יועצת שרשרת אספקה אסטרטגית",
+      "description": "מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.",
+      "url": "https://yasmin-peres.consulting/",
+      "isPartOf": { "@id": "https://yasmin-peres.consulting/#website" },
+      "about": { "@id": "https://yasmin-peres.consulting/#business" },
+      "inLanguage": "he-IL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ראשי", "item": "https://yasmin-peres.consulting/" }
+      ]
+    }
+  ]
+})} />

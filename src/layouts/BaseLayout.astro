@@ -7,15 +7,16 @@ import SEOHead from "../components/common/SEOHead.astro";
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = "יועצת שרשרת אספקה אסטרטגית" } = Astro.props;
+const { title, description = "יועצת שרשרת אספקה אסטרטגית", noindex = false } = Astro.props;
 ---
 
 <!doctype html>
 <html dir="rtl" lang="he">
   <head>
-    <SEOHead title={title} description={description} />
+    <SEOHead title={title} description={description} noindex={noindex} />
   </head>
   <body class="min-h-screen flex flex-col bg-blue-50 text-navy-700 font-sans antialiased">
     <SkipLink />
