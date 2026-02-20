@@ -72,7 +72,7 @@ const methodology = [
       <div class="grid md:grid-cols-5 gap-8 md:gap-14 items-center py-10 md:py-16">
 
         <!-- Text + image column (mobile: stacked) -->
-        <div class="md:col-span-3 space-y-5 text-center md:text-right">
+        <div class="md:col-span-3 space-y-3 text-center md:text-right">
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-navy-700 leading-[1.15]">
             מובילה ארגונים
             <br />
@@ -84,13 +84,13 @@ const methodology = [
           </p>
 
           <!-- Image — visible only on mobile, between subtitle and badge -->
-          <div class="flex justify-center md:hidden py-2">
+          <div class="flex justify-center md:hidden">
             <div class="w-full h-64 sm:h-80 rounded-xl bg-white/60 overflow-hidden border border-blue-100 shadow-sm">
               <img src="/yasmin_peres_csm_1.png" alt="יסמין פרס — יועצת שרשרת אספקה ותפעול" class="w-full h-full object-cover object-top" />
             </div>
           </div>
 
-          <div class="text-[13px] leading-relaxed font-semibold text-navy-500 bg-white/70 backdrop-blur-sm inline-block px-4 py-2.5 rounded-lg border border-blue-100 shadow-sm">
+          <div class="text-base sm:text-lg leading-relaxed font-semibold text-navy-500 tracking-wide inline-block">
             ייעוץ אסטרטגי וניהול פרויקטים | 15 שנות ניסיון כמנהלת שרשרת אספקה ב<span class="font-bold text-navy-700">טבע</span> וב<span class="font-bold text-navy-700">פיברו</span>
           </div>
 
@@ -272,7 +272,7 @@ const methodology = [
 
 <style>
   .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0.5rem);
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
   }
 </style>
 
