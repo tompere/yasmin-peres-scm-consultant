@@ -33,7 +33,12 @@ const { title, description = "יועצת שרשרת אספקה אסטרטגית"
     text-align: right;
   }
 
-  html[dir="rtl"] :is(p, li, h1, h2, h3, h4, h5, h6) {
+  html[dir="rtl"] :is(p, h1, h2, h3, h4, h5, h6) {
     unicode-bidi: plaintext;
+  }
+
+  html[dir="rtl"] :is(ul, ol) {
+    list-style-position: outside;
+    padding-inline-start: 1.25rem;
   }
 </style>
