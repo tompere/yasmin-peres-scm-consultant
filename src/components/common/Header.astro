@@ -1,22 +1,22 @@
 ---
 const navItems = [
-  { label: "ראשי", href: "#home" },
-  { label: "שירותים", href: "#services" },
-  { label: "המתודולוגיה", href: "#methodology" },
-  { label: "שאלות נפוצות", href: "#faq" },
-  { label: "אודות", href: "#about" },
-  { label: "צור קשר", href: "#contact" },
+  { label: "ראשי", href: "/#home" },
+  { label: "שירותים", href: "/#services" },
+  { label: "המתודולוגיה", href: "/#methodology" },
+  { label: "שאלות נפוצות", href: "/#faq" },
+  { label: "אודות", href: "/#about" },
+  { label: "צור קשר", href: "/#contact" },
 ];
 ---
 
 <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 transition-shadow duration-300" id="site-header">
   <nav aria-label="ניווט ראשי" class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <!-- Logo -->
-    <a href="#home" class="group flex items-center gap-3">
+    <a href="/" class="group flex items-center gap-3">
       <span class="text-2xl font-extrabold tracking-tight text-navy-700">
         יסמין פרס
       </span>
-      <span class="text-xs text-navy-400 leading-tight border-r border-blue-100 pr-3">
+      <span class="text-xs text-navy-500 leading-tight border-r border-blue-100 pr-3">
         ייעוץ שרשרת אספקה ותפעול
       </span>
     </a>
@@ -27,7 +27,7 @@ const navItems = [
         <li>
           <a
             href={item.href}
-            class="relative px-4 py-2 text-[15px] font-medium text-navy-400 hover:text-navy-700 transition-colors duration-200 rounded-md hover:bg-blue-50"
+            class="relative px-4 py-2 text-[15px] font-medium text-navy-500 hover:text-navy-700 transition-colors duration-200 rounded-md hover:bg-blue-50"
           >
             {item.label}
           </a>
@@ -39,7 +39,7 @@ const navItems = [
     <button
       id="mobile-menu-toggle"
       type="button"
-      class="md:hidden p-3 rounded-md text-navy-400 hover:text-navy-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-pink-200 transition-colors"
+      class="md:hidden p-3 rounded-md text-navy-500 hover:text-navy-700 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-pink-200 transition-colors"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="תפריט ניווט"
@@ -60,7 +60,7 @@ const navItems = [
         <li>
           <a
             href={item.href}
-            class="block py-3 px-3 text-sm font-medium text-navy-400 hover:text-navy-700 hover:bg-blue-50 rounded-md transition-colors"
+            class="block py-3 px-3 text-sm font-medium text-navy-500 hover:text-navy-700 hover:bg-blue-50 rounded-md transition-colors"
           >
             {item.label}
           </a>
@@ -77,6 +77,14 @@ const navItems = [
   const iconClose = document.getElementById("menu-icon-close");
   const header = document.getElementById("site-header");
 
+  function closeMenu() {
+    if (!menu || !iconOpen || !iconClose || !toggle) return;
+    menu.classList.add("hidden");
+    iconOpen.classList.remove("hidden");
+    iconClose.classList.add("hidden");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
   if (toggle && menu && iconOpen && iconClose) {
     toggle.addEventListener("click", () => {
       const expanded = toggle.getAttribute("aria-expanded") === "true";
@@ -84,17 +92,61 @@ const navItems = [
       menu.classList.toggle("hidden");
       iconOpen.classList.toggle("hidden");
       iconClose.classList.toggle("hidden");
+
+      // Focus first link when opening
+      if (!expanded) {
+        const firstLink = menu.querySelector("a");
+        if (firstLink) firstLink.focus();
+      }
     });
 
     // Close menu on nav link click
     menu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        menu.classList.add("hidden");
-        iconOpen.classList.remove("hidden");
-        iconClose.classList.add("hidden");
-        toggle.setAttribute("aria-expanded", "false");
+        closeMenu();
       });
     });
+
+    // Close on Escape and return focus to toggle
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        closeMenu();
+        toggle.focus();
+      }
+    });
+
+    // Focus trap within mobile menu
+    const menuLinks = menu.querySelectorAll("a");
+    if (menuLinks.length > 0) {
+      const firstLink = menuLinks[0];
+      const lastLink = menuLinks[menuLinks.length - 1];
+
+      menu.addEventListener("keydown", (e) => {
+        if (e.key !== "Tab") return;
+
+        if (e.shiftKey) {
+          // Shift+Tab on first link → go to toggle button
+          if (document.activeElement === firstLink) {
+            e.preventDefault();
+            toggle.focus();
+          }
+        } else {
+          // Tab on last link → go to toggle button
+          if (document.activeElement === lastLink) {
+            e.preventDefault();
+            toggle.focus();
+          }
+        }
+      });
+
+      // Tab from toggle into menu (when open)
+      toggle.addEventListener("keydown", (e) => {
+        if (e.key === "Tab" && !e.shiftKey && toggle.getAttribute("aria-expanded") === "true") {
+          e.preventDefault();
+          firstLink.focus();
+        }
+      });
+    }
   }
 
   // Add shadow on scroll
