@@ -7,7 +7,7 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL("/yasmin_peres_csm_1.png", Astro.site);
+const ogImageURL = new URL("/og-image.png", Astro.site);
 ---
 
 <meta charset="utf-8" />
