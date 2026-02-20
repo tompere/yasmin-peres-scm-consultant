@@ -3,8 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://tompere.github.io",
-  base: "/yasmin-peres-scm-consultant",
+  site: "https://yasmin-peres.consulting",
   integrations: [tailwind(), sitemap()],
   output: "static",
 });
