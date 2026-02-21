@@ -1,13 +1,64 @@
 ---
+interface ServiceCategory {
+  category: string;
+  categoryEn: string;
+  items: string[];
+}
+
 interface Props {
   title: string;
   description: string;
   noindex?: boolean;
+  serviceCategories?: ServiceCategory[];
 }
 
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, serviceCategories } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL("/og-image.png", Astro.site);
+
+// Build dynamic offer catalog from CMS data or use fallback
+function buildOfferCatalog(categories?: ServiceCategory[]) {
+  if (!categories || categories.length === 0) {
+    return [
+      {
+        "@type": "OfferCatalog",
+        "name": "תכנון ובקרה - Planning & Control",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הקמה ושיפור מערכי תכנון (S&OP)", "description": "סנכרון מלא בין מכירות, תפעול ורכש" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שיפור מדדי שירות (OTD/OTIF)", "description": "צמצום פערים בין התכנון לביצוע" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "בניית תחזיות ביקוש", "description": "תחזיות מדויקות למניעת חוסרים או עודפים" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "ניהול מלאי ורכש - Inventory & Procurement",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אופטימיזציה של רמות מלאי", "description": "צמצום מלאי מת ושיפור תזרים המזומנים" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ניהול ספקים ורכש", "description": "ניהול ספקים, רכש ומשלוחי ייבוא/ייצוא" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "מצוינות תפעולית - Operational Excellence",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הגדרת KPIs ומדדי ליבה", "description": "ניהול ביצועים שוטף ואבחון צווארי בקבוק" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ליווי טרנספורמציה דיגיטלית", "description": "הטמעת מערכות תומכות החלטה" } }
+        ]
+      }
+    ];
+  }
+
+  return categories.map((cat) => ({
+    "@type": "OfferCatalog",
+    "name": `${cat.category}${cat.categoryEn ? ` - ${cat.categoryEn}` : ""}`,
+    "itemListElement": cat.items.map((item) => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": item }
+    }))
+  }));
+}
+
+const offerCatalogItems = buildOfferCatalog(serviceCategories);
 ---
 
 <meta charset="utf-8" />
@@ -92,33 +143,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site);
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "שירותי ייעוץ שרשרת אספקה",
-        "itemListElement": [
-          {
-            "@type": "OfferCatalog",
-            "name": "תכנון ובקרה - Planning & Control",
-            "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הקמה ושיפור מערכי תכנון (S&OP)", "description": "סנכרון מלא בין מכירות, תפעול ורכש" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שיפור מדדי שירות (OTD/OTIF)", "description": "צמצום פערים בין התכנון לביצוע" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "בניית תחזיות ביקוש", "description": "תחזיות מדויקות למניעת חוסרים או עודפים" } }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "ניהול מלאי ורכש - Inventory & Procurement",
-            "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אופטימיזציה של רמות מלאי", "description": "צמצום מלאי מת ושיפור תזרים המזומנים" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ניהול ספקים ורכש", "description": "ניהול ספקים, רכש ומשלוחי ייבוא/ייצוא" } }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "מצוינות תפעולית - Operational Excellence",
-            "itemListElement": [
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הגדרת KPIs ומדדי ליבה", "description": "ניהול ביצועים שוטף ואבחון צווארי בקבוק" } },
-              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ליווי טרנספורמציה דיגיטלית", "description": "הטמעת מערכות תומכות החלטה" } }
-            ]
-          }
-        ]
+        "itemListElement": offerCatalogItems
       }
     },
     {

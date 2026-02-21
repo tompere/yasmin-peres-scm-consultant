@@ -4,19 +4,26 @@ import Header from "../components/common/Header.astro";
 import Footer from "../components/common/Footer.astro";
 import SEOHead from "../components/common/SEOHead.astro";
 
+interface ServiceCategory {
+  category: string;
+  categoryEn: string;
+  items: string[];
+}
+
 interface Props {
   title: string;
   description?: string;
   noindex?: boolean;
+  serviceCategories?: ServiceCategory[];
 }
 
-const { title, description = "יועצת שרשרת אספקה אסטרטגית", noindex = false } = Astro.props;
+const { title, description = "יועצת שרשרת אספקה אסטרטגית", noindex = false, serviceCategories } = Astro.props;
 ---
 
 <!doctype html>
 <html dir="rtl" lang="he">
   <head>
-    <SEOHead title={title} description={description} noindex={noindex} />
+    <SEOHead title={title} description={description} noindex={noindex} serviceCategories={serviceCategories} />
   </head>
   <body class="min-h-screen flex flex-col bg-blue-50 text-navy-700 font-sans antialiased">
     <SkipLink />

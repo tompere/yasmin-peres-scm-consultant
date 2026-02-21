@@ -1,65 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getServiceCategories, getFaqs, getAbout } from "../lib/queries";
 
-const serviceCategories = [
-  {
-    category: "תכנון ובקרה",
-    categoryEn: "Planning & Control",
-    items: [
-      "הקמה ושיפור של מערכי תכנון (S&OP) לסנכרון מלא בין מכירות, תפעול ורכש",
-      "שיפור מדדי שירות (OTD/OTIF) וצמצום פערים בין התכנון לביצוע",
-      "בניית תחזיות ביקוש מדויקות יותר למניעת חוסרים או עודפים",
-      "ייעול תהליכי חיזוי ותכנון ביקושים",
-    ],
-  },
-  {
-    category: "ניהול מלאי ורכש",
-    categoryEn: "Inventory & Procurement",
-    items: [
-      "אופטימיזציה של רמות מלאי: צמצום מלאי מת ושיפור תזרים המזומנים",
-      "הטמעת מודלים אנליטיים לניהול מלאי חכם במערכות המידע",
-      "ניהול ספקים, רכש ומשלוחי ייבוא/ייצוא",
-      "קיצור זמני אספקה (Lead Time) ושיפור אמינות מלאי",
-    ],
-  },
-  {
-    category: "מצוינות תפעולית",
-    categoryEn: "Operational Excellence",
-    items: [
-      "הגדרת KPIs ומדדי ליבה לניהול ביצועים שוטף",
-      "אבחון 'צווארי בקבוק' בתהליך ומתן פתרונות להתייעלות מיידית",
-      "ליווי טרנספורמציה דיגיטלית והטמעת מערכות תומכות החלטה",
-      "עיצוב מבנה ארגוני והגדרות תפקיד התומכים בצרכים העסקיים",
-    ],
-  },
-];
-
-const faqs = [
-  {
-    question: "מה זה S&OP ולמה זה חשוב לארגון שלי?",
-    answer: "S&OP (Sales & Operations Planning) הוא תהליך ניהולי מובנה שמסנכרן בין תחזיות המכירות, תכנון הייצור, ניהול המלאי והרכש. המטרה היא ליצור תוכנית עבודה אחת מתואמת שכל הגורמים בארגון פועלים לפיה. ארגונים שמטמיעים S&OP בצורה נכונה רואים בדרך כלל שיפור של 10%-25% במדדי שירות (OTD), צמצום מלאי עודף, והפחתה משמעותית בחוסרים. התהליך מתאים במיוחד לחברות ייצור, יבואנים, ועסקים עם שרשרת אספקה מורכבת."
-  },
-  {
-    question: "כמה זמן לוקח תהליך ייעוץ שרשרת אספקה?",
-    answer: "משך הייעוץ תלוי בהיקף ובמורכבות הארגון. פרויקט אבחון ממוקד נמשך בדרך כלל 4-6 שבועות. הקמת מערך S&OP מלא או אופטימיזציה של ניהול מלאי נמשכים 3-6 חודשים. פרויקט טרנספורמציה מקיף שכולל שינוי תהליכים, הטמעת מערכות ומבנה ארגוני יכול להימשך 6-18 חודשים. אני מציעה תמיד להתחיל בשלב אבחון קצר שמאפשר להגדיר יעדים מדידים ולבנות תוכנית עבודה מדויקת."
-  },
-  {
-    question: "מהם מדדי OTD ו-OTIF ואיך משפרים אותם?",
-    answer: "OTD (On-Time Delivery) מודד את אחוז ההזמנות שסופקו בזמן שהובטח ללקוח. OTIF (On-Time In-Full) מחמיר יותר ומודד הזמנות שסופקו גם בזמן וגם בכמות המלאה. בתעשייה, יעד סביר הוא OTD מעל 95% ו-OTIF מעל 90%. שיפור המדדים דורש עבודה על מספר חזיתות: דיוק תחזיות ביקוש, אמינות מלאי, זמני ייצור יציבים, וניהול ספקים אפקטיבי. הגישה שלי מתחילה במיפוי הנקודות שגורמות לכשלים ומתמקדת בפתרונות שנותנים תוצאות מהירות."
-  },
-  {
-    question: "באילו תעשיות את מתמחה?",
-    answer: "הניסיון שלי מגיע בעיקר מתעשיית הפארמה (טבע תעשיות פרמצבטיות) ותעשיית הכימיקלים (פיברו). עם זאת, העקרונות של ניהול שרשרת אספקה — תכנון ביקוש, אופטימיזציה של מלאי, ניהול ספקים, ומצוינות תפעולית — רלוונטיים לכל חברת ייצור, יבואנות או הפצה. עבדתי עם ארגונים בתחומי המזון, הקוסמטיקה, הציוד הרפואי, והתעשייה הכללית. הגישה שלי מותאמת תמיד לגודל הארגון, למשאביו ולאתגרים הספציפיים שלו."
-  },
-  {
-    question: "מה ההבדל בין יועץ שרשרת אספקה לבין מנהל פרויקטים?",
-    answer: "מנהל פרויקטים מתמקד בהובלת פרויקט מוגדר — לוחות זמנים, משימות ותקציב. יועץ שרשרת אספקה מביא מומחיות מקצועית עמוקה בתחום עצמו: הוא יודע לאבחן בעיות, לזהות הזדמנויות, ולעצב פתרונות שמבוססים על ניסיון בתעשייה. אני משלבת את שני התפקידים — מביאה ידע מקצועי בשרשרת אספקה יחד עם יכולת הובלת שינוי ארגוני. היתרון הוא שהפתרונות לא רק מתוכננים אלא גם מיושמים בשטח ומשתרשים בארגון."
-  },
-  {
-    question: "איך מתחילים תהליך ייעוץ?",
-    answer: "השלב הראשון הוא פגישת היכרות ללא עלות, שבה אני מקשיבה לאתגרים שלכם ומבינה את ההקשר הארגוני. בהמשך, אני מבצעת אבחון מקצועי שכולל מיפוי תהליכים, ניתוח נתונים, וראיונות עם בעלי תפקידים מרכזיים. בסיום האבחון מוגשת תוכנית עבודה מפורטת עם יעדים מדידים, לוחות זמנים וסדרי עדיפויות. כל שלב מותאם לקצב הארגון ולמשאביו. צרו קשר דרך וואטסאפ, טלפון או מייל ונקבע פגישה ראשונית."
-  },
-];
+const serviceCategories = await getServiceCategories();
+const faqs = await getFaqs();
+const about = await getAbout();
 
 const methodology = [
   {
@@ -85,7 +30,7 @@ const methodology = [
 ];
 ---
 
-<BaseLayout title="יסמין פרס | יועצת שרשרת אספקה אסטרטגית" description="מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.">
+<BaseLayout title="יסמין פרס | יועצת שרשרת אספקה אסטרטגית" description="מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון." serviceCategories={serviceCategories}>
 
   <!-- HERO -->
   <section id="home" tabindex="-1" class="relative bg-gradient-to-b from-blue-50 via-blue-50 to-white scroll-mt-20 overflow-hidden">
@@ -249,48 +194,39 @@ const methodology = [
           </h2>
 
           <div class="space-y-4 text-navy-500 leading-relaxed text-lg">
-            <p>
-              עם רקע של 15 שנים בתפקידי ניהול בכירים בשרשראות אספקה גלובליות ומקומיות, כולל תפקיד אחרון כ-<span class="font-bold text-navy-700">Supply Chain Director & Head of IL Supply Chain</span> בטבע וכ-<span class="font-bold text-navy-700">Head of Plant Supply Chain</span> בפיברו, אני מביאה לשולחן ראייה מערכתית רחבה לצד יכולת ירידה לפרטים הקטנים.
-            </p>
-            <p>
-              המומחיות שלי היא בחיבור בין העולם האסטרטגי לרצפת הייצור: תרגום מטרות עסקיות לתהליכים מדידים, בניית תוכניות עבודה פרקטיות, והובלת שינויים ארגוניים שמחזיקים מעמד לאורך זמן.
-            </p>
-            
-            <div class="bg-blue-50 p-5 rounded-xl border-r-4 border-pink-300 space-y-3">
-              <p class="font-bold text-navy-700 text-lg">דוגמת פרויקט: חיסכון של 50% בעלויות תפעול</p>
-              <p class="text-[15px]">
-                במסגרת תפקידי כ-Head of Plant Supply Chain, הובלתי פרויקט אופטימיזציה מקיף במפעל ייצור פרמצבטי. האתגר: עלויות תפעול גבוהות, מלאי עודף שתפס הון חוזר משמעותי, וזמני אספקה ארוכים שפגעו ברמת השירות ללקוחות.
-              </p>
-              <p class="text-[15px]">
-                הפרויקט כלל אבחון מעמיק של שרשרת האספקה, עיצוב מחדש של תהליכי התכנון והרכש, הטמעת מודלים אנליטיים לניהול מלאי חכם, ואופטימיזציה של בסיס הספקים. במקביל, הגדרנו KPIs ברורים ושגרות ניהול שבועיות למעקב ביצועים.
-              </p>
-              <div class="grid sm:grid-cols-3 gap-3 pt-1">
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <span class="block text-2xl font-bold text-pink-600">50%</span>
-                  <span class="text-xs text-navy-500">חיסכון בעלויות תפעול</span>
-                </div>
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <span class="block text-2xl font-bold text-pink-600">18</span>
-                  <span class="text-xs text-navy-500">חודשים עד תוצאות מלאות</span>
-                </div>
-                <div class="bg-white p-3 rounded-lg text-center">
-                  <span class="block text-2xl font-bold text-pink-600">95%+</span>
-                  <span class="text-xs text-navy-500">מדד OTD לאחר הפרויקט</span>
-                </div>
+            <Fragment set:html={about.bioHtml} />
+
+            {about.caseStudy && (
+              <div class="bg-blue-50 p-5 rounded-xl border-r-4 border-pink-300 space-y-3">
+                <p class="font-bold text-navy-700 text-lg">{about.caseStudy.title}</p>
+                {about.caseStudy.description.split("\n\n").map((paragraph) => (
+                  <p class="text-[15px]">{paragraph}</p>
+                ))}
+                {about.caseStudy.metrics && about.caseStudy.metrics.length > 0 && (
+                  <div class="grid sm:grid-cols-3 gap-3 pt-1">
+                    {about.caseStudy.metrics.map((metric) => (
+                      <div class="bg-white p-3 rounded-lg text-center">
+                        <span class="block text-2xl font-bold text-pink-600">{metric.value}</span>
+                        <span class="text-xs text-navy-500">{metric.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
+            )}
 
             <p>
               אני מאמינה בגישה "בגובה העיניים" – פתרונות המותאמים בדיוק לגודל הארגון, למשאביו ולתרבות הניהולית שלו.
             </p>
           </div>
 
-          <div class="flex flex-wrap gap-2.5 pt-3 text-[13px] text-navy-500 font-medium">
-            <span class="px-3 py-1.5 bg-white rounded-full border border-blue-100 shadow-sm">B.Sc הנדסת תעשייה וניהול</span>
-            <span class="px-3 py-1.5 bg-white rounded-full border border-blue-100 shadow-sm">15+ שנות ניסיון</span>
-            <span class="px-3 py-1.5 bg-white rounded-full border border-blue-100 shadow-sm">טבע תעשיות פרמצבטיות</span>
-            <span class="px-3 py-1.5 bg-white rounded-full border border-blue-100 shadow-sm">פיברו</span>
-          </div>
+          {about.badges && about.badges.length > 0 && (
+            <div class="flex flex-wrap gap-2.5 pt-3 text-[13px] text-navy-500 font-medium">
+              {about.badges.map((badge) => (
+                <span class="px-3 py-1.5 bg-white rounded-full border border-blue-100 shadow-sm">{badge.label}</span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
