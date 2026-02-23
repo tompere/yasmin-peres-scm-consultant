@@ -5,16 +5,20 @@ const serviceCategories = [
   {
     category: "תכנון ובקרה",
     categoryEn: "Planning & Control",
+    targetAudience: "מתאים לחברות ייצור ויבואנים שרוצים לסנכרן מכירות, תפעול ורכש.",
+    expectedOutcome: "שיפור צפוי: 10%-25% במדדי שירות (OTD).",
     items: [
       "הקמה ושיפור של מערכי תכנון (S&OP) לסנכרון מלא בין מכירות, תפעול ורכש",
       "שיפור מדדי שירות (OTD/OTIF) וצמצום פערים בין התכנון לביצוע",
       "בניית תחזיות ביקוש מדויקות יותר למניעת חוסרים או עודפים",
-      "ייעול תהליכי חיזוי ותכנון ביקושים",
+      "תהליך תכנון הייצור — אפיון צרכים, ליווי בבחירת מודולים ושיטות אנליטיות",
     ],
   },
   {
     category: "ניהול מלאי ורכש",
     categoryEn: "Inventory & Procurement",
+    targetAudience: "מתאים לארגונים עם מלאי מורכב, יבואנים וחברות ייצור שמבקשים לשחרר הון חוזר.",
+    expectedOutcome: "צמצום מלאי מת ושחרור הון חוזר.",
     items: [
       "אופטימיזציה של רמות מלאי: צמצום מלאי מת ושיפור תזרים המזומנים",
       "הטמעת מודלים אנליטיים לניהול מלאי חכם במערכות המידע",
@@ -25,9 +29,11 @@ const serviceCategories = [
   {
     category: "מצוינות תפעולית",
     categoryEn: "Operational Excellence",
+    targetAudience: "מתאים לארגונים שמבקשים להגדיר KPIs, לזהות צווארי בקבוק ולשפר ביצועים שוטפים.",
+    expectedOutcome: "שגרות ניהול ברורות ושיפור מתמיד בביצועים.",
     items: [
       "הגדרת KPIs ומדדי ליבה לניהול ביצועים שוטף",
-      "אבחון 'צווארי בקבוק' בתהליך ומתן פתרונות להתייעלות מיידית",
+      "אבחון 'צווארי בקבוק' בתהליכים השונים ומתן פתרונות להתייעלות מיידית",
       "ליווי טרנספורמציה דיגיטלית והטמעת מערכות תומכות החלטה",
       "עיצוב מבנה ארגוני והגדרות תפקיד התומכים בצרכים העסקיים",
     ],
@@ -37,7 +43,11 @@ const serviceCategories = [
 const faqs = [
   {
     question: "מה זה S&OP ולמה זה חשוב לארגון שלי?",
-    answer: "S&OP (Sales & Operations Planning) הוא תהליך ניהולי מובנה שמסנכרן בין תחזיות המכירות, תכנון הייצור, ניהול המלאי והרכש. המטרה היא ליצור תוכנית עבודה אחת מתואמת שכל הגורמים בארגון פועלים לפיה. ארגונים שמטמיעים S&OP בצורה נכונה רואים בדרך כלל שיפור של 10%-25% במדדי שירות (OTD), צמצום מלאי עודף, והפחתה משמעותית בחוסרים. התהליך מתאים במיוחד לחברות ייצור, יבואנים, ועסקים עם שרשרת אספקה מורכבת."
+    answer: "S&OP (Sales & Operations Planning) הוא תהליך ניהולי חוצה־ארגון שמחבר בין תחזיות מכירות, תכנון תפעולי, רכש, ייצור ופיננסים לכדי תכנית אחת מוסכמת וריאלית. מטרתו לאזן בין ביקוש להיצע, לשפר רווחיות, לצמצם מלאים וחוסרים, ולהבטיח קבלת החלטות מבוססת נתונים ושקיפות ניהולית. יישום S&OP נכון יוצר תיאום אמיתי בין מחלקות, משפר רמת שירות ללקוחות ומאפשר לארגון לפעול בצורה יציבה, גמישה ורווחית יותר בסביבה עסקית משתנה."
+  },
+  {
+    question: "מה ההשקעה הנדרשת בתהליך ייעוץ?",
+    answer: "ההשקעה תלויה בהיקף הפרויקט ובמורכבות הארגון. אני מתחילה תמיד באבחון ממוקד וקצר, כך ששני הצדדים יכולים להעריך את הפוטנציאל לפני התחייבות ארוכה. ברוב המקרים, ההחזר על ההשקעה מתחיל להיראות כבר בחודשים הראשונים — בין אם דרך צמצום מלאי, חיסכון ברכש, או שיפור מדדי שירות."
   },
   {
     question: "כמה זמן לוקח תהליך ייעוץ שרשרת אספקה?",
@@ -66,21 +76,25 @@ const methodology = [
     step: "01",
     title: "אבחון",
     desc: "הכרת הארגון, מיפוי התהליכים הקיימים וזיהוי פערים ואתגרים.",
+    deliverable: "מסמך אבחון עם מיפוי פערים וסדרי עדיפויות",
   },
   {
     step: "02",
     title: "הגדרת יעדים",
     desc: "הגדרת מדדי ביצוע (KPIs) ויעדים מדידים — תרגום מטרות עסקיות לתוכנית עבודה.",
+    deliverable: "דשבורד KPIs מותאם אישית",
   },
   {
     step: "03",
     title: "תכנון ובנייה",
     desc: "הקמת תהליכי תכנון ובקרה, עיצוב שגרות עבודה ותשתית דיגיטלית.",
+    deliverable: "תוכנית עבודה מפורטת + שגרות ניהול שבועיות",
   },
   {
     step: "04",
     title: "יישום וליווי",
     desc: "ליווי היישום בפועל בשטח — מדידת תוצאות, התאמות והטמעה להמשכיות.",
+    deliverable: "דוח תוצאות עם המלצות להמשכיות",
   },
 ];
 ---
@@ -103,11 +117,11 @@ const methodology = [
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-navy-700 leading-[1.15]">
             מובילה ארגונים
             <br />
-            <span class="text-pink-600">למצוינות תפעולית.</span>
+            <span class="text-pink-600">למצוינות תפעולית</span>
           </h1>
 
-          <p class="text-base sm:text-lg text-navy-500 max-w-xl mx-auto md:mx-0 leading-relaxed">
-            הופכת את שרשרת האספקה שלכם למנוע צמיחה. אני מסייעת לארגונים לגשר על הפער שבין אסטרטגיה לביצוע, לייעל תהליכים ולשפר את השורה התחתונה.
+          <p class="text-base sm:text-lg text-navy-500 max-w-xl mx-auto md:mx-0 leading-relaxed font-semibold">
+            מהאסטרטגיה – לשורה התחתונה
           </p>
 
           <!-- Image — visible only on mobile, between subtitle and badge -->
@@ -118,7 +132,7 @@ const methodology = [
           </div>
 
           <div class="text-base sm:text-lg leading-relaxed font-semibold text-navy-500 tracking-wide inline-block">
-            ייעוץ אסטרטגי וניהול פרויקטים | 15 שנות ניסיון כמנהלת שרשרת אספקה ב<span class="font-bold text-navy-700">טבע</span> וב<span class="font-bold text-navy-700">פיברו</span>
+            בדיוק, יעילות ומצוינות ביצועית | 15 שנות ניסיון בניהול שרשראות אספקה גלובליות
           </div>
 
           <!-- CTA — inline on desktop, hidden on mobile (sticky version shown instead) -->
@@ -166,10 +180,11 @@ const methodology = [
 
       <div class="space-y-6">
         {serviceCategories.map((cat) => (
-          <div class="rounded-xl border border-blue-100 p-6 sm:p-8 hover:border-pink-200 transition-colors">
+          <div class="rounded-xl border border-blue-100 p-6 sm:p-8 hover:border-pink-200 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
             <h3 class="text-xl font-bold text-navy-700 mb-1 leading-relaxed">{cat.category}</h3>
-            <p class="text-sm text-pink-700 font-medium mb-4">{cat.categoryEn}</p>
-            <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+            <p class="text-sm text-pink-700 font-medium mb-2">{cat.categoryEn}</p>
+            <p class="text-sm text-navy-600 mb-4 font-medium">{cat.targetAudience}</p>
+            <ul class="space-y-3">
               {cat.items.map((item) => (
                 <li class="flex items-start gap-2 text-[15px] text-navy-500 leading-relaxed">
                   <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-pink-300 shrink-0" aria-hidden="true" />
@@ -177,6 +192,7 @@ const methodology = [
                 </li>
               ))}
             </ul>
+            <p class="text-sm text-pink-700 font-medium mt-4 pt-3 border-t border-blue-100">{cat.expectedOutcome}</p>
           </div>
         ))}
       </div>
@@ -199,9 +215,12 @@ const methodology = [
             <span class="block text-4xl font-bold text-pink-600 mb-2">{phase.step}</span>
             <h3 class="font-bold text-navy-700 mb-1">{phase.title}</h3>
             <p class="text-sm text-navy-500 leading-relaxed">{phase.desc}</p>
+            <p class="text-sm text-pink-700 font-medium mt-3 pt-2 border-t border-blue-100">מה מקבלים: {phase.deliverable}</p>
           </div>
         ))}
       </div>
+      <p class="text-center text-navy-500 mt-6 text-[15px]">ציר זמן טיפוסי: אבחון תוך 4-6 שבועות, תוצאות ראשונות תוך 3 חודשים.</p>
+      <p class="text-center text-navy-700 font-semibold mt-4 text-lg">אני לא מגישה מצגת ונעלמת. אני נשארת עד שהתוצאות משתרשות בארגון.</p>
     </div>
   </section>
 
@@ -250,21 +269,36 @@ const methodology = [
 
           <div class="space-y-4 text-navy-500 leading-relaxed text-lg">
             <p>
-              עם רקע של 15 שנים בתפקידי ניהול בכירים בשרשראות אספקה גלובליות ומקומיות, כולל תפקיד אחרון כ-<span class="font-bold text-navy-700">Supply Chain Director & Head of IL Supply Chain</span> בטבע וכ-<span class="font-bold text-navy-700">Head of Plant Supply Chain</span> בפיברו, אני מביאה לשולחן ראייה מערכתית רחבה לצד יכולת ירידה לפרטים הקטנים.
+              נעים מאוד, אני יועצת ומנהלת שרשרת אספקה עם ניסיון של למעלה מ־15 שנה בתפקידי ניהול בכירים בשרשראות אספקה גלובליות ומקומיות. בתפקידי האחרון שימשתי כמנהלת שרשרת האספקה במפעל ב־<span class="font-bold text-navy-700">פיברו</span>, ולפני כן כיהנתי כמנהלת שרשרת האספקה ודירקטורית שרשרת האספקה בישראל ב־<span class="font-bold text-navy-700">טבע</span>. לאורך הדרך הובלתי עשרות פרויקטים מורכבים, במסגרתם צברתי ניסיון, ידע והיכרות מעמיקה עם מגוון רחב של מערכות מידע ואמצעים טכנולוגיים מתקדמים לייעול שרשרת האספקה מקצה לקצה. את הידע המקצועי שלי רכשתי בלימודי תואר בהנדסה תעשייה וניהול ב־<span class="font-bold text-navy-700">אוניברסיטת בן־גוריון בנגב</span>, לצד ניסיון מעשי עשיר בשטח.
             </p>
             <p>
-              המומחיות שלי היא בחיבור בין העולם האסטרטגי לרצפת הייצור: תרגום מטרות עסקיות לתהליכים מדידים, בניית תוכניות עבודה פרקטיות, והובלת שינויים ארגוניים שמחזיקים מעמד לאורך זמן.
+              אני מביאה לשולחן ראייה מערכתית רחבה לצד יכולת ירידה לפרטים הקטנים, ומתמחה בחיבור בין העולם האסטרטגי לרצפת הייצור – בתרגום מטרות עסקיות לתהליכים מדידים, בניית תוכניות עבודה פרקטיות והובלת שינויים ארגוניים שמחזיקים מעמד לאורך זמן.
             </p>
-            
-            <div class="bg-blue-50 p-5 rounded-xl border-r-4 border-pink-300 space-y-3">
-              <p class="font-bold text-navy-700 text-lg">דוגמת פרויקט: חיסכון של 50% בעלויות תפעול</p>
-              <p class="text-[15px]">
-                במסגרת תפקידי כ-Head of Plant Supply Chain, הובלתי פרויקט אופטימיזציה מקיף במפעל ייצור פרמצבטי. האתגר: עלויות תפעול גבוהות, מלאי עודף שתפס הון חוזר משמעותי, וזמני אספקה ארוכים שפגעו ברמת השירות ללקוחות.
-              </p>
-              <p class="text-[15px]">
-                הפרויקט כלל אבחון מעמיק של שרשרת האספקה, עיצוב מחדש של תהליכי התכנון והרכש, הטמעת מודלים אנליטיים לניהול מלאי חכם, ואופטימיזציה של בסיס הספקים. במקביל, הגדרנו KPIs ברורים ושגרות ניהול שבועיות למעקב ביצועים.
-              </p>
-              <div class="grid sm:grid-cols-3 gap-3 pt-1">
+
+            <div class="bg-blue-50 p-5 rounded-xl border-r-4 border-pink-300 space-y-4">
+              <p class="font-bold text-navy-700 text-lg">סיפור הצלחה: הפחתת 50% עלויות תפעול (מלאי מתגלגל)</p>
+              <div>
+                <p class="font-semibold text-navy-700 mb-1">הסיפור</p>
+                <p class="text-[15px]">
+                  במסגרת תפקידי במפעל ייצור פרמצבטי, הובלתי פרויקט אופטימיזציית מלאים רחב היקף כחלק ממהלך כולל לשיפור ביצועי שרשרת האספקה. הארגון התמודד עם עלויות תפעול גבוהות, מלאי עודף שתפס הון חוזר משמעותי וזמני אספקה ארוכים שפגעו ברמת השירות ללקוחות. הנהלת האתר ביקשה ליצור שינוי עומק – לא פתרון נקודתי, אלא מהלך שיחבר בין תכנון, רכש, ייצור ולוגיסטיקה לשרשרת אספקה רזה, מדויקת ומבוקרת יותר.
+                </p>
+              </div>
+              <div>
+                <p class="font-semibold text-navy-700 mb-1">התהליך</p>
+                <p class="text-[15px]">
+                  הפרויקט החל באבחון עומק של כלל שרשרת האספקה מקצה לקצה – מניתוח תחזיות וביקושים, דרך מדיניות מלאי ורמות בטיחות, ועד לבחינת ביצועי ספקים וזמני אספקה בפועל. מיפינו צווארי בקבוק, זיהינו שונות גבוהה בתכנון והיעדר סטנדרטיזציה בתהליכי הרכש.
+                </p>
+                <p class="text-[15px] mt-2">
+                  בהמשך עיצבנו מחדש את תהליכי התכנון, בנינו מדיניות מלאי מבוססת נתונים, הטמענו מודלים אנליטיים לניהול מלאי חכם וביצענו אופטימיזציה לבסיס הספקים. במקביל הוגדרו KPIs ברורים (מלאי, זמני אספקה, רמת שירות, עמידה בתכנית) והוטמעו שגרות ניהול שבועיות ליצירת משמעת ארגונית ושיפור מתמיד.
+                </p>
+              </div>
+              <div>
+                <p class="font-semibold text-navy-700 mb-1">הפתרון והתוצאה</p>
+                <p class="text-[15px]">
+                  המהלך יצר סנכרון מלא בין ביקוש לייצור, צמצם משמעותית מלאים עודפים, שיפר זמינות חומרים וקיצר זמני אספקה. בתוך תקופה קצרה הושג חיסכון של כ־50% בעלויות התפעול, לצד שיפור ברמת השירות ובהון החוזר. מעבר לתוצאות הכספיות, נבנתה תשתית תהליכית ותרבות ניהולית שמאפשרות לארגון להמשיך לצמוח בצורה יציבה, מדידה ורווחית.
+                </p>
+              </div>
+              <div class="grid sm:grid-cols-3 gap-3 pt-2">
                 <div class="bg-white p-3 rounded-lg text-center">
                   <span class="block text-2xl font-bold text-pink-600">50%</span>
                   <span class="text-xs text-navy-500">חיסכון בעלויות תפעול</span>
@@ -306,29 +340,38 @@ const methodology = [
             שרשרת האספקה שלכם?
           </h2>
           <p class="text-navy-500 leading-relaxed text-lg text-center">
-            בואו נבדוק יחד איך אפשר לשפר את הביצועים בארגון שלכם. אשמח לקבוע פגישה לבחינה של עבודה משותפת.
+            פגישת היכרות ראשונית ללא עלות — בואו נבדוק יחד אם יש פוטנציאל לעבודה משותפת.
           </p>
 
           <div class="space-y-4 pt-3">
-            <a href="https://wa.me/972548882218?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%99%D7%A1%D7%9E%D7%99%D7%9F%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%95%D7%97%D7%97%20%D7%A2%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%A9%D7%A8%D7%A9%D7%A8%D7%AA%20%D7%90%D7%A1%D7%A4%D7%A7%D7%94." target="_blank" rel="noopener noreferrer" aria-label="שלחו הודעת וואטסאפ ליסמין פרס" class="flex items-center gap-3 text-navy-600 hover:text-[#25D366] transition-colors group">
-              <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <a href="https://wa.me/972548882218?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%99%D7%A1%D7%9E%D7%99%D7%9F%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%95%D7%97%D7%97%20%D7%A2%D7%9C%20%D7%99%D7%99%D7%A2%D7%95%D7%A5%20%D7%A9%D7%A8%D7%A9%D7%A8%D7%AA%20%D7%90%D7%A1%D7%A4%D7%A7%D7%94." target="_blank" rel="noopener noreferrer" aria-label="שלחו הודעת וואטסאפ ליסמין פרס" class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-navy-600 hover:text-[#25D366] transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </div>
+                <span class="font-medium">כתבו לי בוואטסאפ</span>
               </div>
-              <span class="font-medium">כתבו לי בוואטסאפ — אחזור אליכם בהקדם</span>
+              <span class="text-sm text-navy-500 sm:me-0">תוך 24 שעות נקבע שיחת היכרות של 30 דקות</span>
             </a>
 
-            <a href="tel:+972548882218" aria-label="התקשרו ליסמין פרס: 054-888-2218" class="flex items-center gap-3 text-navy-600 hover:text-pink-500 transition-colors group">
-              <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <a href="tel:+972548882218" aria-label="התקשרו ליסמין פרס: 054-888-2218" class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-navy-600 hover:text-pink-500 transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <span class="font-medium">054-888-2218</span>
               </div>
-              <span class="font-medium">054-888-2218</span>
+              <span class="text-sm text-navy-500 sm:me-0">זמינה בימים א'-ה' בין 9:00–18:00</span>
             </a>
 
-            <a href="mailto:yasminbit@gmail.com" aria-label="שלחו מייל ליסמין פרס: yasminbit@gmail.com" class="flex items-center gap-3 text-navy-600 hover:text-pink-500 transition-colors group">
-              <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <a href="mailto:yasminbit@gmail.com" aria-label="שלחו מייל ליסמין פרס: yasminbit@gmail.com" class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-navy-600 hover:text-pink-500 transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform shrink-0">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <span class="font-medium">yasminbit@gmail.com</span>
               </div>
-              <span class="font-medium">yasminbit@gmail.com</span>
+              <span class="text-sm text-navy-500 sm:me-0">אחזור עם תשובה תוך יום עסקים</span>
             </a>
 
             <a href="https://www.linkedin.com/in/yasmin-peres-abb7545b/" target="_blank" rel="noopener noreferrer" aria-label="פרופיל לינקדאין של יסמין פרס" class="flex items-center gap-3 text-navy-600 hover:text-pink-500 transition-colors group">
@@ -338,6 +381,10 @@ const methodology = [
               <span class="font-medium">פרופיל לינקדאין</span>
             </a>
           </div>
+
+          <p class="text-center text-navy-500 pt-4 text-[15px]">
+            עדיין לא בטוחים? שלחו שאלה קצרה ואחזור עם תשובה אישית.
+          </p>
         </div>
     </div>
   </section>
@@ -358,7 +405,7 @@ const methodology = [
       if (!href || href === "#") return;
       const hash = href.startsWith("/#") ? href.slice(1) : href;
       const target = document.querySelector(hash);
-      if (target) {
+      if (target && target instanceof HTMLElement) {
         e.preventDefault();
         target.scrollIntoView({ behavior: "smooth" });
         // Move focus to target section after scroll completes
