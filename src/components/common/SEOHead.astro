@@ -1,4 +1,9 @@
 ---
+import { getImage } from "astro:assets";
+import ogPortrait from "../../assets/3-yasmin-about.jpg";
+import heroDesktop from "../../assets/1-yasmin-hero-desktop.jpg";
+import heroMobile from "../../assets/2-yasmin-hero-mobile.jpg";
+
 interface Props {
   title: string;
   description: string;
@@ -7,7 +12,12 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL("/og-image.png", Astro.site);
+const ogImage = await getImage({ src: ogPortrait, width: 1200, height: 630, fit: "cover", position: "top", format: "jpg", quality: 85 });
+const heroPreload = await getImage({ src: heroDesktop, width: 640, format: "webp", quality: 85 });
+const heroMobilePreload = await getImage({ src: heroMobile, width: 780, format: "webp", quality: 85 });
+const ogImageURL = new URL(ogImage.src, Astro.site);
+const heroPreloadURL = new URL(heroPreload.src, Astro.site);
+const heroMobilePreloadURL = new URL(heroMobilePreload.src, Astro.site);
 ---
 
 <meta charset="utf-8" />
@@ -69,7 +79,8 @@ const ogImageURL = new URL("/og-image.png", Astro.site);
 </noscript>
 
 <!-- Preload hero image for LCP -->
-<link rel="preload" as="image" href="/yasmin_peres_csm_1.png" />
+<link rel="preload" as="image" href={heroMobilePreloadURL} type="image/webp" media="(max-width: 767px)" />
+<link rel="preload" as="image" href={heroPreloadURL} type="image/webp" media="(min-width: 768px)" />
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify({
@@ -81,7 +92,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site);
       "name": "יסמין פרס - ייעוץ שרשרת אספקה ותפעול",
       "alternateName": "Yasmin Peres - Supply Chain Consulting",
       "url": "https://yasmin-peres.consulting/",
-      "image": "https://yasmin-peres.consulting/yasmin_peres_csm_1.png",
+      "image": ogImageURL.href,
       "description": "מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.",
       "telephone": "+972-54-888-2218",
       "email": "yasminbit@gmail.com",
@@ -128,7 +139,7 @@ const ogImageURL = new URL("/og-image.png", Astro.site);
       "alternateName": "Yasmin Peres",
       "jobTitle": "יועצת שרשרת אספקה אסטרטגית",
       "description": "15 שנות ניסיון בניהול שרשראות אספקה גלובליות, כולל תפקידי Supply Chain Director בטבע ו-Head of Plant Supply Chain בפיברו",
-      "image": "https://yasmin-peres.consulting/yasmin_peres_csm_1.png",
+      "image": ogImageURL.href,
       "url": "https://yasmin-peres.consulting/",
       "telephone": "+972-54-888-2218",
       "email": "yasminbit@gmail.com",

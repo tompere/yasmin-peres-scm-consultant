@@ -1,5 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Picture } from "astro:assets";
+import heroDesktop from "../assets/1-yasmin-hero-desktop.jpg";
+import heroMobile from "../assets/2-yasmin-hero-mobile.jpg";
+import aboutPortrait from "../assets/3-yasmin-about.jpg";
 
 const serviceCategories = [
   {
@@ -125,7 +129,7 @@ const methodology = [
           <!-- Image — visible only on mobile, between subtitle and badge -->
           <div class="flex justify-center md:hidden">
             <div class="w-full h-64 sm:h-80 rounded-xl bg-white/60 overflow-hidden border border-blue-100 shadow-sm">
-              <img src="/yasmin_peres_csm_1.png" alt="יסמין פרס — יועצת שרשרת אספקה ותפעול" width="644" height="621" fetchpriority="high" class="w-full h-full object-cover object-top" />
+              <Picture src={heroMobile} formats={["avif", "webp"]} widths={[640, 780, 960]} sizes="(max-width: 767px) 100vw, 0px" alt="יסמין פרס — יועצת שרשרת אספקה ותפעול" fetchpriority="high" quality={85} class="w-full h-full object-cover object-top" />
             </div>
           </div>
 
@@ -147,7 +151,7 @@ const methodology = [
         <!-- Image column — desktop only -->
         <div class="md:col-span-2 hidden md:flex justify-center">
           <div class="w-72 h-96 lg:w-80 lg:h-[28rem] rounded-xl bg-white/60 overflow-hidden border border-blue-100 shadow-sm">
-            <img src="/yasmin_peres_csm_1.png" alt="יסמין פרס — יועצת שרשרת אספקה ותפעול" width="644" height="621" fetchpriority="high" class="w-full h-full object-cover object-top" />
+            <Picture src={heroDesktop} formats={["avif", "webp"]} widths={[576, 640, 960]} sizes="(min-width: 1024px) 320px, 288px" alt="יסמין פרס — יועצת שרשרת אספקה ותפעול" fetchpriority="high" quality={85} class="w-full h-full object-cover object-top" />
           </div>
         </div>
       </div>
@@ -256,7 +260,7 @@ const methodology = [
       <div class="grid md:grid-cols-5 gap-10 items-start">
         <div class="md:col-span-2 flex justify-center">
           <div class="w-full max-w-xs aspect-[3/4] rounded-xl bg-blue-50 overflow-hidden border border-blue-100 shadow-sm">
-            <img src="/yasmin_peres_csm_1.png" alt="יסמין פרס" width="644" height="621" loading="lazy" class="w-full h-full object-cover" />
+            <Picture src={aboutPortrait} formats={["avif", "webp"]} widths={[320, 640, 960]} sizes="320px" alt="יסמין פרס" loading="lazy" quality={85} class="w-full h-full object-cover" />
           </div>
         </div>
 
