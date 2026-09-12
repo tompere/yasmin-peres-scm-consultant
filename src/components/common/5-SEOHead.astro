@@ -1,0 +1,179 @@
+---
+import { getImage } from "astro:assets";
+import ogPortrait from "../../assets/3-yasmin-about.jpg";
+import heroDesktop from "../../assets/1-yasmin-hero-desktop.jpg";
+import heroMobile from "../../assets/2-yasmin-hero-mobile.jpg";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = await getImage({ src: ogPortrait, width: 1200, height: 630, fit: "cover", position: "top", format: "jpg", quality: 85 });
+const heroPreload = await getImage({ src: heroDesktop, width: 640, format: "webp", quality: 85 });
+const heroMobilePreload = await getImage({ src: heroMobile, width: 780, format: "webp", quality: 85 });
+const ogImageURL = new URL(ogImage.src, Astro.site);
+const heroPreloadURL = new URL(heroPreload.src, Astro.site);
+const heroMobilePreloadURL = new URL(heroMobilePreload.src, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow" />
+)}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:locale" content="he_IL" />
+<meta property="og:site_name" content="יסמין פרס - ייעוץ וניהול שרשרת אספקה" />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="יסמין פרס — יועצת שרשרת אספקה ותפעול" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+<meta name="twitter:image:alt" content="יסמין פרס — יועצת שרשרת אספקה ותפעול" />
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="he-IL" href={canonicalURL} />
+<link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+<!-- Fonts — async load to avoid render-blocking -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
+  rel="stylesheet"
+  media="print"
+  onload="this.media='all'"
+/>
+<noscript>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+</noscript>
+
+<!-- Preload hero image for LCP -->
+<link rel="preload" as="image" href={heroMobilePreloadURL} type="image/webp" media="(max-width: 767px)" />
+<link rel="preload" as="image" href={heroPreloadURL} type="image/webp" media="(min-width: 768px)" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://yasmin-peres.consulting/#business",
+      "name": "יסמין פרס - ייעוץ שרשרת אספקה ותפעול",
+      "alternateName": "Yasmin Peres - Supply Chain Consulting",
+      "url": "https://yasmin-peres.consulting/",
+      "image": ogImageURL.href,
+      "description": "מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.",
+      "telephone": "+972-54-888-2218",
+      "email": "yasminbit@gmail.com",
+      "founder": { "@id": "https://yasmin-peres.consulting/#person" },
+      "areaServed": { "@type": "Country", "name": "Israel" },
+      "knowsLanguage": ["he", "en"],
+      "sameAs": ["https://www.linkedin.com/in/yasmin-peres-abb7545b/"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "שירותי ייעוץ שרשרת אספקה",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "תכנון ובקרה - Planning & Control",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הקמה ושיפור מערכי תכנון (S&OP)", "description": "סנכרון מלא בין מכירות, תפעול ורכש" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שיפור מדדי שירות (OTD/OTIF)", "description": "צמצום פערים בין התכנון לביצוע" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "בניית תחזיות ביקוש", "description": "תחזיות מדויקות למניעת חוסרים או עודפים" } }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "ניהול מלאי ורכש - Inventory & Procurement",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "אופטימיזציה של רמות מלאי", "description": "צמצום מלאי מת ושיפור תזרים המזומנים" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ניהול ספקים ורכש", "description": "ניהול ספקים, רכש ומשלוחי ייבוא/ייצוא" } }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "מצוינות תפעולית - Operational Excellence",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "הגדרת KPIs ומדדי ליבה", "description": "ניהול ביצועים שוטף ואבחון צווארי בקבוק" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "ליווי טרנספורמציה דיגיטלית", "description": "הטמעת מערכות תומכות החלטה" } }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://yasmin-peres.consulting/#person",
+      "name": "יסמין פרס",
+      "alternateName": "Yasmin Peres",
+      "jobTitle": "יועצת שרשרת אספקה אסטרטגית",
+      "description": "15 שנות ניסיון בניהול שרשראות אספקה גלובליות, כולל תפקידי Supply Chain Director בטבע ו-Head of Plant Supply Chain בפיברו",
+      "image": ogImageURL.href,
+      "url": "https://yasmin-peres.consulting/",
+      "telephone": "+972-54-888-2218",
+      "email": "yasminbit@gmail.com",
+      "alumniOf": { "@type": "EducationalOrganization", "name": "B.Sc הנדסת תעשייה וניהול" },
+      "knowsAbout": ["Supply Chain Management", "S&OP", "Inventory Optimization", "Procurement", "Operational Excellence", "Demand Planning"],
+      "worksFor": { "@id": "https://yasmin-peres.consulting/#business" },
+      "sameAs": ["https://www.linkedin.com/in/yasmin-peres-abb7545b/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yasmin-peres.consulting/#website",
+      "name": "יסמין פרס - ייעוץ וניהול שרשרת אספקה",
+      "alternateName": "Yasmin Peres - Supply Chain Consulting",
+      "url": "https://yasmin-peres.consulting/",
+      "inLanguage": "he-IL",
+      "publisher": { "@id": "https://yasmin-peres.consulting/#business" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://yasmin-peres.consulting/",
+      "name": "יסמין פרס | יועצת שרשרת אספקה אסטרטגית",
+      "description": "מובילה ארגונים למצוינות תפעולית בשרשרת האספקה. ייעוץ אסטרטגי וניהול פרויקטים בתפעול ורכש עם 15 שנות ניסיון.",
+      "url": "https://yasmin-peres.consulting/",
+      "isPartOf": { "@id": "https://yasmin-peres.consulting/#website" },
+      "about": { "@id": "https://yasmin-peres.consulting/#business" },
+      "inLanguage": "he-IL",
+      "datePublished": "2025-01-01",
+      "dateModified": "2026-02-20"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "ראשי", "item": "https://yasmin-peres.consulting/" }
+      ]
+    }
+  ]
+})} />
